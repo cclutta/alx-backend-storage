@@ -11,5 +11,5 @@ def schools_by_topic(mongo_collection, topic):
     update many rows
     """
     return mongo_collection.find(
-        {"topic": topic}
+        {"topics": topic}
     )
