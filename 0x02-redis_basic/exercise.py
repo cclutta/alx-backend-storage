@@ -4,6 +4,9 @@ Exercise module
 """
 
 import redis
+import uuid
+from typing import Union, Callable, Optional
+
 
 
 class Cache:
