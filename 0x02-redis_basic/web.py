@@ -13,12 +13,14 @@ count = 0
 
 
 def get_page(url: str) -> str:
-    rc.set(f"cached:{url}", count)
+    """ Get the cached values. """
+    rc.set("cached:{}".format(url), count)
     resp = requests.get(url)
-    rc.incr(f"count:{url}")
-    rc.setex(f"cached:{url}", 10, rc.get(f"cached:{url}"))
+    rc.incr("count:{}".format(url))
+    rc.setex("cached:{}".format(url), 10, rc.get("cached:{}".format(url)))
     return resp.text
 
 
 if __name__ == "__main__":
+    """ Main method. """
     get_page('http://slowwly.robertomurray.co.uk')
