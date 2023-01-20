@@ -11,12 +11,12 @@ import requests
 rc = redis.Redis()
 count = 0
 
+
 def get_page(url: str) -> str:
-    """ get a page and cache value"""
-    rc.set("cached:{}".format(url), count)
+     rc.set(f"cached:{url}", count)
     resp = requests.get(url)
-    rc.incr("count:{}".format(url))
-    rc.setex("cached:{}".format(url), 10, rc.get("cached:{}".format(url)))
+    rc.incr(f"count:{url}")
+    rc.setex(f"cached:{url}", 10, rc.get(f"cached:{url}"))
     return resp.text
 
 
